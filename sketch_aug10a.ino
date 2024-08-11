@@ -3,7 +3,8 @@ const int SPEAKER_PIN = 2;       // Digital pin connected to Grove Speaker
 const int VIBRATION_PIN = 3;     // Digital pin connected to Vibration Motor
 
 const int FSR_THRESHOLD = 100;   // Threshold value for FSR to detect high pressure
-const int FEEDBACK_DURATION = 100; // Short duration for ping sound and vibration in milliseconds
+const int FEEDBACK_DURATION_SOUND = 100; // Short duration for ping sound and vibration in milliseconds
+const int FEEDBACK_DURATION_VIBRATIN = 1000; // Short duration for vibration in milliseconds, 1000 == 1sec
 
 void setup() {
   pinMode(FSR_PIN, INPUT);
@@ -25,8 +26,9 @@ void loop() {
 }
 
 void providePingFeedback() {
-  tone(SPEAKER_PIN, 1500, FEEDBACK_DURATION);  // Generate a "ping" sound at 1500 Hz for 100ms
+  tone(SPEAKER_PIN, 1500, FEEDBACK_DURATION_SOUND);  // Generate a "ping" sound at 1500 Hz for 100ms
+  delay(FEEDBACK_DURATION_VIBRATIN); 
   digitalWrite(VIBRATION_PIN, HIGH);           // Turn on the vibration motor
-  delay(FEEDBACK_DURATION);                    // Wait for the duration of the ping
+  delay(FEEDBACK_DURATION_VIBRATIN);                    // Wait for the duration of the ping
   digitalWrite(VIBRATION_PIN, LOW);            // Turn off the vibration motor
 }
